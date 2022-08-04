@@ -1,16 +1,45 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Modal, ModalBody, ModalHeader,ModalFooter ,Button } from 'reactstrap';
-const CreateTask = ({modal, toggle}) => {
+const CreateTask = ({modal, toggle, save}) => {
+  const [taskName,setTaskName] = useState("");
+  const [desc,setDesc] = useState("");
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    if(name === "taskName"){
+      setTaskName(value);
+    }
+    else{
+      setDesc(value);
+    }
+  }
+  // creating a function as handleSaving is responsible for saving the task name and description to the taskList array
+  const handleSaving = () => {
+    let taskObj = {};
+    taskObj["Name"] = taskName;
+    taskObj["Description"] = desc;
+    save(taskObj);
+  }
   return (
+
     <div className='createTask'>
        <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+        <ModalHeader toggle={toggle}>Create New Task</ModalHeader>
         <ModalBody>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          <form>
+            <div className="form-group mb-3">
+              <label>Task Name</label>
+                <input type="text" className='form-control mt-1' value={taskName} onChange={handleChange} name="taskName" />
+            </div>
+            <div className="form-group mb-3">
+              <label>Description</label>
+               <textarea rows="5" className='form-control mt-1' value={desc} onChange={handleChange} name="description" ></textarea>
+            </div>
+          </form>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={toggle}>Do Something</Button>{' '}
-          <Button color="secondary" onClick={toggle}>Cancel</Button>
+          <Button color="primary" onClick={handleSaving}>create</Button>{' '}
+          <Button color="secondary" onClick={toggle}>cancel</Button>
         </ModalFooter>
       </Modal>
     </div>
