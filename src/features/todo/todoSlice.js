@@ -20,8 +20,21 @@ export const todoSlice = createSlice({
         // here we are updating the todos object with a new state where there is no todo which we get from the action.payload
       state.todos = state.todos.filter((todo) => todo.id !== action.payload);
     },
+    updateTodo:(state,action) => {
+      const updatedTodo = action.payload;
+          state.todos = state.todos.map((todo) => {
+            if(todo.id === updatedTodo.id)
+            {
+              return updatedTodo;
+            }
+            else{
+              return todo;
+            }
+          }
+          )
+    },
   },
 });
 
-export const {addTodo, removeTodo} = todoSlice.actions;
+export const {addTodo, removeTodo,updateTodo} = todoSlice.actions;
 export default todoSlice.reducer
