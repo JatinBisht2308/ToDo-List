@@ -1,23 +1,41 @@
-import React from 'react'
-import {useSelector, useDispatch} from 'react-redux';
-import {removeTodo} from '../features/todo/todoSlice';
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { removeTodo } from "../features/todo/todoSlice";
 const Todos = () => {
   // this is the object key that we take inside the state when defining initialState in a particular slice
-  const todos = useSelector(state => state.todos);
+  const todos = useSelector((state) => state.todos);
   const dispatch = useDispatch();
-    return (
+  return (
     <div>
-    <div className='flex justify-center mt-5 text-lg font-semibold'>Todos List</div>
-    <ul className="list-none px-5">
+      <div className="flex justify-center mt-5 text-lg font-semibold">
+        Todos List
+      </div>
+      <ul className="list-none px-5">
         {todos.map((todo) => (
           <li
             className="mt-5 flex justify-between  items-center bg-zinc-800 px-4 py-2 rounded"
             key={todo.id}
           >
-            <div className='text-white'>{todo.text}</div>
+            <div className="text-white">{todo.text}</div>
             <button
-             onClick={() => dispatch(removeTodo(todo.id))}
-              className="text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md ml-4"
+              onClick={() => dispatch(removeTodo(todo.id))}
+              className="text-white bg-amber-500 border-0 py-1 px-4 focus:outline-none hover:bg-amber-600 rounded text-md ml-4"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path>
+                <polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon>
+              </svg>
+            </button>
+            <button
+              onClick={() => dispatch(removeTodo(todo.id))}
+              className="text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md ml-2"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +56,7 @@ const Todos = () => {
         ))}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default Todos
+export default Todos;
