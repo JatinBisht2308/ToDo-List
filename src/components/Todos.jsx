@@ -8,7 +8,7 @@ const Todos = () => {
     return (
     <div>
     <div className='flex justify-center mt-5 text-lg font-semibold'>Todos List</div>
-    <ul className="list-none">
+    <ul className="list-none px-5">
         {todos.map((todo) => (
           <li
             className="mt-5 flex justify-between  items-center bg-zinc-800 px-4 py-2 rounded"
